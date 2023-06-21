@@ -42,7 +42,7 @@ while True:
     # Draw things on the screen
 
     # DONE 02: Try to draw a circle (any size, any color, anywhere)
-    pygame.draw.circle(screen, color="green", radius=30, center=(100, 100))
+    pygame.draw.circle(screen, color="dark green", radius=30, center=(100, 100))
 
     # DONE 03: Try to draw a red circle in the middle of the screen with a radius 100
     pygame.draw.circle(screen, color='red', center=(400, 300), radius=180)
