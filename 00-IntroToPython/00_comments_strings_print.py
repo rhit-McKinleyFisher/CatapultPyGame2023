@@ -5,7 +5,7 @@
 #   Read the code below.  Predict (in your head)
 #   what will get printed (i.e., displayed) when the code runs.
 #
-#   Then run this module by right clicking anywhere in this window
+#   Then run this module by right-clicking anywhere in this window
 #   and then selecting:
 #        Run 'name of file'
 #   (i.e.  Run 'm1e_comments_strings...')  Or, use the Windows keyboard
