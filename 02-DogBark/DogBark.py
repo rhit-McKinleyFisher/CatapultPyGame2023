@@ -31,14 +31,17 @@ def main():
     caption2 = font2.render('Get your paws out of my face!', True, WHITE)
 
     # Prepare the music
-    # TODO 8: Create a Sound object from the "bark.wav" file.
+    # Done 8: Create a Sound object from the "bark.wav" file.
+    barking = pygame.mixer.Sound("bark.wav")
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            # TODO 9: Play the music (bark) if there's a mouse click.
-
+            # Done 9: Play the music (bark) if there's a mouse click.
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print("Bark")
+                barking.play()
         # Clear the screen and set the screen background
         screen.fill(WHITE)
 
