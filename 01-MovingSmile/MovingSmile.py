@@ -49,7 +49,7 @@ def main():
         if keys_pressed[pygame.K_s]:
             eye_delta_y += 1
         if keys_pressed[pygame.K_d]:
-            eye_delta_y -= 1
+            eye_delta_x += 1
 
 
         pygame.draw.circle(screen, (255, 255, 0), (320, 240), 210)  # yellow circle
@@ -68,7 +68,14 @@ def main():
         if is_nose_drawn:
             pygame.draw.circle(screen, (80, 0, 0), (320, 245), radius=10)
 
-
+        if eye_delta_y > 640:
+            eye_delta_y = 0
+        if eye_delta_y < 0:
+            eye_delta_y = 640
+        if eye_delta_x > 480:
+            eye_delta_x = 0
+        if eye_delta_x < 0:
+            eye_delta_x = 480
         # Done 2: Draw a mouth
         # Suggestion: color (0,0,0), x 230, y 320, width 180, height 30
         pygame.draw.rect(screen, (0, 0, 0), (230, 320, 180, 30))
