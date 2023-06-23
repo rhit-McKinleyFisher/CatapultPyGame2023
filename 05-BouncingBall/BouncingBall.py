@@ -8,16 +8,53 @@ import random
 # TODO: Create a Ball class.
 # TODO: Possible member variables: screen, color, x, y, radius, speed_x, speed_y
 # TODO: Methods: __init__, draw, move
+class Ball:
+    def __init__(self, screen, x, y, speed_x, speed_y, color, size):
+        self.screen = screen
+        self.x = x
+        self.y = y
+        self.speed_x = speed_x
+        self.speed_y = speed_y
+        self.color = color
+        self.size = size
+
+    def move(self):
+        self.x += self.speed_x
+        self.y += self.speed_y
+        if self.x > self.screen.get_width():
+            self.speed_x *= -1
+        if self.x < 0:
+            self.speed_x *= -1
+        if self.y > self.screen.get_height():
+            self.speed_y *= -1
+        if self.y < 0:
+            self.speed_y *= -1
+
+    def draw(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.size)
 
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((300, 300))
+    screen = pygame.display.set_mode((1000, 800))
     pygame.display.set_caption('Bouncing Ball')
     screen.fill(pygame.Color('gray'))
     clock = pygame.time.Clock()
 
     # TODO: Create an instance of the Ball class called ball1
+    #   ball1 = Ball(screen, 80, 80, 1, 1, (0, 0, 225), 4)
+
+    list_balls = []
+    for k in range(10000):
+        new_balls = Ball(screen,
+                         random.randint(15, screen.get_width() - 15),
+                         random.randint(15, screen.get_height() - 15),
+                         random.randint(1, 5),
+                         random.randint(1, 5),
+                         (random.randint(0, 250), random.randint(0, 250), random.randint(0, 250)),
+                         random.randint(2, 20))
+
+        list_balls.append(new_balls)
 
     while True:
         for event in pygame.event.get():
@@ -29,6 +66,12 @@ def main():
 
         # TODO: Move the ball
         # TODO: Draw the ball
+        # ball.move()
+        # ball.draw()
+
+        for uno_ball in list_balls:
+            uno_ball.move()
+            uno_ball.draw()
 
         pygame.display.update()
 
