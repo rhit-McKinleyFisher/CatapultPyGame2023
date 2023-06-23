@@ -7,7 +7,7 @@ import pygame.time
 
 
 class Raindrop:
-    def __init__(self, screen : pygame.Surface, x, y):
+    def __init__(self, screen: pygame.Surface, x, y):
         """ Creates a Raindrop sprite that travels down at a random speed. """
         # Done 8: Initialize this Raindrop, as follows:
         #     - Store the screen.
@@ -68,7 +68,6 @@ class Hero:
         else:
             self.screen.blit(self.image_without_umbrella, (self.x, self.y))
 
-
     def is_hit_by(self, raindrop):
         """ Returns true if the given raindrop is hitting this Hero, otherwise false. """
         # Done 19: Return True if this Hero is currently colliding with the given Raindrop.
@@ -79,19 +78,26 @@ class Hero:
 class Cloud:
     def __init__(self, screen, x, y, image_filename):
         """ Creates a Cloud sprite that will produce Raindrop objects.  The cloud will be moving around. """
-        # TODO 24: Initialize this Cloud, as follows:
+        # Done 24: Initialize this Cloud, as follows:
         #     - Store the screen.
         #     - Set the initial position of this Cloud to x and y.
         #     - Set the image of this Cloud to the given image filename.
         #     - Create a list for Raindrop objects as an empty list called raindrops.
         #   Use instance variables:
         #      screen  x  y  image   raindrops.
-        pass
+        self.screen = screen
+        self.x = x
+        self.y = y
+        self.image_another_cloud = pygame.image.load(image_filename)
+
+        raindrops = []
+
 
     def draw(self):
         """ Draws this sprite onto the screen. """
-        # TODO 25: Draw (blit) this Cloud's image at its current position.
-        pass
+        # Done 25: Draw (blit) this Cloud's image at its current position.
+        self.screen.blit(self.image_another_cloud, (self.x, self.y))
+
 
     def rain(self):
         """ Adds a Raindrop to the array of raindrops so that it looks like the Cloud is raining. """
@@ -116,8 +122,8 @@ def main():
     mike = Hero(screen, 200, 400, 'Mike_umbrella.png', 'Mike.png')
     # Done 15: Make a Hero, named alyssa, with appropriate images, starting at position x=700 y=400.
     alyssa = Hero(screen, 700, 400, "Alyssa_umbrella.png", 'Alyssa.png')
-    # TODO 23: Make a Cloud, named cloud, with appropriate images, starting at position x=300 y=50.
-
+    # Done 23: Make a Cloud, named cloud, with appropriate images, starting at position x=300 y=50.
+    cloud = Cloud(screen, 300, 50, "another_cloud.png")
     # Done 3: Enter the game loop, with a clock tick of 60 (or so) at each iteration.
     while True:
         clock.tick(60)
@@ -125,7 +131,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-        # TODO 27: Inside the game loop (AFTER the events loop above), get the list of keys that are currently pressed.
+        # Done 27: Inside the game loop (AFTER the events loop above), get the list of keys that are currently pressed.
         #     Arrange so that the Cloud moves:
         #       5 pixels (or 10 pixels) to the right if the Right Arrow key (pygame.K_RIGHT) is pressed.
         #       5 pixels (or 10 pixels) to the left  if the Left  Arrow key (pygame.K_LEFT)  is pressed.
@@ -133,7 +139,15 @@ def main():
         #       5 pixels (or 10 pixels) down         if the Down  Arrow key (pygame.K_DOWN)  is pressed.
         # DISCUSS: If you want something to happen once per key press, put it in the events loop above
         #          If you want something to continually happen while holding the key, put it after the events loop.
-
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed[pygame.K_UP]:
+            cloud.y -= 5
+        if keys_pressed[pygame.K_LEFT]:
+            cloud.x -= 5
+        if keys_pressed[pygame.K_DOWN]:
+            cloud.y += 5
+        if keys_pressed[pygame.K_RIGHT]:
+            cloud.x += 5
         # Done 5: Inside the game loop, draw the screen (fill with white)
         screen.fill((255, 255, 255))
         # --- begin area of test_drop code that will be removed later
@@ -158,7 +172,7 @@ def main():
         #          Then add similar code to alyssa that sets her last_hit_time and moves the test_drop to 10 320
         # --- end area of test_drop code that will be removed later
 
-        # TODO 26: Draw the Cloud.
+        # Done 26: Draw the Cloud.
 
         # TODO 29: Remove the temporary testdrop code from this function and refactor it as follows:
         # TODO: Make the Cloud "rain", then:
@@ -171,6 +185,7 @@ def main():
         # Done 18: Draw the Heroes (Mike and Alyssa)
         mike.draw()
         alyssa.draw()
+        cloud.draw()
         # Done 6: Update the display and remove the pass statement below
         pygame.display.update()
 
