@@ -194,7 +194,7 @@ def main():
             if alyssa.is_hit_by(drop):
                 alyssa.last_hit_time = time.time()
                 cloud.raindrops.remove(drop)
-            if drop.is_off_screen:
+            if drop.is_off_screen():
                 cloud.raindrops.remove(drop)
         # Done 18: Draw the Heroes (Mike and Alyssa)
         mike.draw()
