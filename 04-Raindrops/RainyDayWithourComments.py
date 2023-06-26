@@ -79,13 +79,13 @@ def main():
                 sys.exit()
         keys_pressed = pygame.key.get_pressed()
         if keys_pressed[pygame.K_UP]:
-            cloud.y -= 5
+            cloud.y -= 15
         if keys_pressed[pygame.K_LEFT]:
-            cloud.x -= 5
+            cloud.x -= 15
         if keys_pressed[pygame.K_DOWN]:
-            cloud.y += 5
+            cloud.y += 15
         if keys_pressed[pygame.K_RIGHT]:
-            cloud.x += 5
+            cloud.x += 15
         screen.fill((255, 255, 255))
 
         cloud.rain()
@@ -95,10 +95,10 @@ def main():
             if mike.is_hit_by(drop):
                 mike.last_hit_time = time.time()
                 cloud.raindrops.remove(drop)
-            if alyssa.is_hit_by(drop):
+            elif alyssa.is_hit_by(drop):
                 alyssa.last_hit_time = time.time()
                 cloud.raindrops.remove(drop)
-            if drop.is_off_screen:
+            elif drop.is_off_screen():
                 cloud.raindrops.remove(drop)
 
         mike.draw()
